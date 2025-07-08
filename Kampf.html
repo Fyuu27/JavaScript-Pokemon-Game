@@ -115,16 +115,16 @@
     <script>
         // --- Datenbank für alle möglichen Pokémon ---
         const pokedex = {
-            Bisasam: { typ: "Pflanze", hp: 152, angriff: 49, bild: "250px-Hauptartwork_001.png", attacken: [{ name: "Rankenhieb", schaden: 20 }, { name: "Rasierblatt", schaden: 25 }, { name: "Solarstrahl", schaden: 40 }] },
-            Glumanda: { typ: "Feuer", hp: 146, angriff: 52, bild: "221px-Hauptartwork_004.png", attacken: [{ name: "Glut", schaden: 20 }, { name: "Feuerzahn", schaden: 30 }, { name: "Flammenwurf", schaden: 40 }] },
-            Schiggy: { typ: "Wasser", hp: 151, angriff: 48, bild: "242px-Hauptartwork_007.png", attacken: [{ name: "Aquaknarre", schaden: 20 }, { name: "Blubber", schaden: 25 }, { name: "Hydropumpe", schaden: 40 }] },
-            Pikachu: { typ: "Elektro", hp: 142, angriff: 55, bild: "250px-Hauptartwork_025.png", attacken: [{ name: "Donnerschock", schaden: 20 }, { name: "Donnerblitz", schaden: 30 }, { name: "Donner", schaden: 40 }] },
-            Digda: { typ: "Boden", hp: 117, angriff: 55, bild: "250px-Hauptartwork_050.png", attacken: [{ name: "Kratzer", schaden: 15 }, { name: "Schaufler", schaden: 30 }, { name: "Erdbeben", schaden: 40 }] },
-            Glaziola: { typ: "Eis", hp: 172, angriff: 60, bild: "250px-Hauptartwork_471.png", attacken: [{ name: "Eissplitter", schaden: 20 }, { name: "Eissturm", schaden: 30 }, { name: "Blizzard", schaden: 40 }] },
-            Nebulak: { typ: "Gift", hp: 137, angriff: 35, bild: "250px-Hauptartwork_092.png", attacken: [{ name: "Schlecker", schaden: 15 }, { name: "Spukball", schaden: 30 }, { name: "Giftschock", schaden: 35 }] },
-            Abra: { typ: "Psycho", hp: 132, angriff: 20, bild: "250px-Hauptartwork_063.png", attacken: [{ name: "Konfusion", schaden: 20 }, { name: "Psychokinese", schaden: 35 }, { name: "Teleport", schaden: 0 }] },
-            Mogelbaum: { typ: "Gestein", hp: 177, angriff: 100, bild: "216px-Hauptartwork_185.png", attacken: [{ name: "Steinwurf", schaden: 25 }, { name: "Bodycheck", schaden: 30 }, { name: "Holzhammer", schaden: 40 }] },
-            Snobilikat: { typ: "Normal", hp: 150, angriff: 70, bild: "250px-Hauptartwork_053.png", attacken: [{ name: "Kratzer", schaden: 20 }, { name: "Biss", schaden: 25 }, { name: "Schlitzer", schaden: 35 }] },
+            Bisasam: { typ: "Pflanze", hp: 150, angriff: 50, bild: "250px-Hauptartwork_001.png", attacken: [{ name: "Rankenhieb", schaden: 20 }, { name: "Rasierblatt", schaden: 25 }, { name: "Solarstrahl", schaden: 40 }] },
+            Glumanda: { typ: "Feuer", hp: 150, angriff: 50, bild: "221px-Hauptartwork_004.png", attacken: [{ name: "Glut", schaden: 20 }, { name: "Feuerzahn", schaden: 25 }, { name: "Flammenwurf", schaden: 40 }] },
+            Schiggy: { typ: "Wasser", hp: 150, angriff: 50, bild: "242px-Hauptartwork_007.png", attacken: [{ name: "Aquaknarre", schaden: 20 }, { name: "Blubber", schaden: 25 }, { name: "Hydropumpe", schaden: 40 }] },
+            Pikachu: { typ: "Elektro", hp: 145, angriff: 50, bild: "250px-Hauptartwork_025.png", attacken: [{ name: "Donnerschock", schaden: 20 }, { name: "Donnerblitz", schaden: 25 }, { name: "Donner", schaden: 35 }] },
+            Digda: { typ: "Boden", hp: 125, angriff: 50, bild: "250px-Hauptartwork_050.png", attacken: [{ name: "Kratzer", schaden: 15 }, { name: "Schaufler", schaden: 25 }, { name: "Erdbeben", schaden: 35 }] },
+            Glaziola: { typ: "Eis", hp: 160, angriff: 55, bild: "250px-Hauptartwork_471.png", attacken: [{ name: "Eissplitter", schaden: 20 }, { name: "Eissturm", schaden: 25 }, { name: "Blizzard", schaden: 35 }] },
+            Nebulak: { typ: "Gift", hp: 140, angriff: 40, bild: "250px-Hauptartwork_092.png", attacken: [{ name: "Schlecker", schaden: 15 }, { name: "Spukball", schaden: 25 }, { name: "Giftschock", schaden: 35 }] },
+            Abra: { typ: "Psycho", hp: 140, angriff: 30, bild: "250px-Hauptartwork_063.png", attacken: [{ name: "Konfusion", schaden: 20 }, { name: "Psychokinese", schaden: 35 }, { name: "Teleport", schaden: 10 }] },
+            Mogelbaum: { typ: "Gestein", hp: 160, angriff: 80, bild: "216px-Hauptartwork_185.png", attacken: [{ name: "Steinwurf", schaden: 20 }, { name: "Bodycheck", schaden: 30 }, { name: "Holzhammer", schaden: 40 }] },
+            Snobilikat: { typ: "Normal", hp: 150, angriff: 60, bild: "250px-Hauptartwork_053.png", attacken: [{ name: "Kratzer", schaden: 20 }, { name: "Biss", schaden: 25 }, { name: "Schlitzer", schaden: 30 }] },
             Rayquaza: { typ: "Drache", hp: 210, angriff: 150, bild: "250px-Hauptartwork_384.png", attacken: [{ name: "Hyperstrahl", schaden: 50 }, { name: "Windhose", schaden: 30 }, { name: "Wutanfall", schaden: 40 }] }
         };
         // --- Typen-Chart ---
@@ -174,27 +174,27 @@
         }
         const gegnerTeams = {
             Pyro: (() => {
-                // Ein Feuer-Pokémon
-                const fireMons = Object.keys(pokedex).filter(k => pokedex[k].typ === "Feuer");
+                // Ein Feuer-Pokémon (ohne Rayquaza!)
+                const fireMons = Object.keys(pokedex).filter(k => pokedex[k].typ === "Feuer" && k !== "Rayquaza");
                 const fire = fireMons[Math.floor(Math.random() * fireMons.length)];
-                // Ein zufälliges, aber nicht das gleiche wie das Feuer-Pokémon
-                const restMons = Object.keys(pokedex).filter(k => k !== fire);
+                // Ein zufälliges, aber nicht das gleiche wie das Feuer-Pokémon und nicht Rayquaza
+                const restMons = Object.keys(pokedex).filter(k => k !== fire && k !== "Rayquaza");
                 const rnd = restMons[Math.floor(Math.random() * restMons.length)];
                 return [fire, rnd];
             })(),
             Koga: (() => {
-                // Mindestens ein Gift-Pokémon
-                const giftMons = Object.keys(pokedex).filter(k => pokedex[k].typ === "Gift");
+                // Mindestens ein Gift-Pokémon (ohne Rayquaza!)
+                const giftMons = Object.keys(pokedex).filter(k => pokedex[k].typ === "Gift" && k !== "Rayquaza");
                 const gift = giftMons[Math.floor(Math.random() * giftMons.length)];
-                // Zwei weitere zufällige, aber keine Dopplung
-                const restMons = Object.keys(pokedex).filter(k => k !== gift);
+                // Zwei weitere zufällige, aber keine Dopplung und kein Rayquaza
+                const restMons = Object.keys(pokedex).filter(k => k !== gift && k !== "Rayquaza");
                 const rnd1 = restMons[Math.floor(Math.random() * restMons.length)];
                 const restMons2 = restMons.filter(k => k !== rnd1);
                 const rnd2 = restMons2[Math.floor(Math.random() * restMons2.length)];
                 return [gift, rnd1, rnd2];
             })(),
             Giovanni: (() => {
-                // Giovanni: 4 Pokémon, vorletztes Snobilikat, letztes Rayquaza, zwei zufällige davor
+                // Giovanni: 4 Pokémon, vorletztes Snobilikat, letztes Rayquaza, zwei zufällige davor (ohne Rayquaza)
                 const exclude = ["Snobilikat", "Rayquaza"];
                 const rndMons = Object.keys(pokedex).filter(k => !exclude.includes(k));
                 // Zwei verschiedene zufällige Pokémon
