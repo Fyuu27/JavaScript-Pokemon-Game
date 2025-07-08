@@ -1,0 +1,60 @@
+.Auswahl {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+}
+
+.poke1 {
+  margin: 10px;
+  width: 33.3%;
+  border: 1px solid blue;
+  text-align: center;
+}
+
+.poke1 img {
+  display: block;
+  margin: 10px auto;
+}
+
+.poke1-table {
+  margin: 20px auto;
+  font-size: 1.5em;
+  border-collapse: collapse;
+}
+
+.poke1-table td {
+  padding: 5px 15px;
+}
+
+.cbutton {
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.cbutton:hover {
+    background-color: skyblue;
+}
+
+.teaml {
+    background-color: blue;
+    height: 2px;
+}
+
+body {
+    background: linear-gradient(to bottom, #aee1f9, #f0f8ff);
+}
+#abra {
+  height: 45%;
+}
+
+#glaziola {
+  height: 46%;
+}
+
+#bisasam {
+  height: 46%;
+}

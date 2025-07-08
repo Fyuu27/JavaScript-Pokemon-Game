@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Pokémon Kampf</title>
+    <link rel="stylesheet" href="style1.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .battlefield {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+
+        .pokemon {
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            background: white;
+            width: 220px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .pokemon img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+        }
+
+        .hp-bar {
+            height: 20px;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .hp-fill {
+            height: 100%;
+            background: #4CAF50;
+            width: 100%;
+            transition: width 0.3s;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background: #ff9800;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #e68900;
+        }
+
+        #output {
+            margin-top: 20px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Pokémon Kampf</h1>
+    <div class="battlefield">
+        <div class="pokemon" id="player-box">
+            <h2 id="player-name"></h2>
+            <img id="player-img" src="" alt="">
+            <div class="hp-bar">
+                <div class="hp-fill" id="player-hp"></div>
+            </div>
+            <div id="attacken"></div>
+        </div>
+        <div class="pokemon" id="enemy-box">
+            <h2 id="enemy-name"></h2>
+            <img id="enemy-img" src="" alt="">
+            <div class="hp-bar">
+                <div class="hp-fill" id="enemy-hp"></div>
+            </div>
+        </div>
+    </div>
+    <div id="output"></div>
+    <script>
+        // --- Datenbank für alle möglichen Pokémon ---
+        const pokedex = {
+            Bisasam: { typ: "Pflanze", hp: 152, angriff: 49, bild: "./Pictures/250px-Hauptartwork_001.png", attacken: [{ name: "Rankenhieb", schaden: 20 }, { name: "Rasierblatt", schaden: 25 }, { name: "Solarstrahl", schaden: 40 }] },
+            Glumanda: { typ: "Feuer", hp: 146, angriff: 52, bild: "./Pictures/221px-Hauptartwork_004.png", attacken: [{ name: "Glut", schaden: 20 }, { name: "Feuerzahn", schaden: 30 }, { name: "Flammenwurf", schaden: 40 }] },
+            Schiggy: { typ: "Wasser", hp: 150, angriff: 48, bild: "./Pictures/242px-Hauptartwork_007.png", attacken: [{ name: "Aquaknarre", schaden: 20 }, { name: "Blubber", schaden: 25 }, { name: "Hydropumpe", schaden: 40 }] },
+            Pikachu: { typ: "Elektro", hp: 142, angriff: 55, bild: "./Pictures/250px-Hauptartwork_025.png", attacken: [{ name: "Donnerschock", schaden: 20 }, { name: "Donnerblitz", schaden: 30 }, { name: "Donner", schaden: 40 }] },
+            Digda: { typ: "Boden", hp: 117, angriff: 55, bild: "./Pictures/250px-Hauptartwork_050.png", attacken: [{ name: "Kratzer", schaden: 15 }, { name: "Schaufler", schaden: 30 }, { name: "Erdbeben", schaden: 40 }] },
+            Glaziola: { typ: "Eis", hp: 172, angriff: 60, bild: "./Pictures/250px-Hauptartwork_471.png", attacken: [{ name: "Eissplitter", schaden: 20 }, { name: "Eissturm", schaden: 30 }, { name: "Blizzard", schaden: 40 }] },
+            Nebulak: { typ: "Gift", hp: 137, angriff: 35, bild: "./Pictures/250px-Hauptartwork_092.png", attacken: [{ name: "Schlecker", schaden: 15 }, { name: "Spukball", schaden: 30 }, { name: "Giftschock", schaden: 35 }] }
+        };
+        // --- Typen-Chart ---
+        const typeChart = {
+            Feuer: { starkGegen: ["Pflanze", "Eis"], schwachGegen: ["Wasser", "Gestein"] },
+            Wasser: { starkGegen: ["Feuer", "Gestein"], schwachGegen: ["Pflanze", "Elektro"] },
+            Pflanze: { starkGegen: ["Wasser", "Gestein"], schwachGegen: ["Feuer", "Flug"] },
+            Elektro: { starkGegen: ["Wasser", "Flug"], schwachGegen: ["Boden"] },
+            Boden: { starkGegen: ["Feuer", "Elektro"], schwachGegen: ["Wasser", "Pflanze"] },
+            Eis: { starkGegen: ["Pflanze", "Boden", "Flug", "Drache"], schwachGegen: ["Feuer", "Wasser", "Stahl"] },
+            Gift: { starkGegen: ["Pflanze", "Fee"], schwachGegen: ["Boden", "Psycho"] }
+        };
+        // --- Pokemon Klasse ---
+        class Pokemon {
+            constructor(name, typ, hp, angriff, attacken, bild) {
+                this.name = name;
+                this.typ = typ;
+                this.maxHp = hp;
+                this.hp = hp;
+                this.angriff = angriff;
+                this.attacken = attacken;
+                this.bild = bild;
+            }
+            getDamageMultiplier(gegnerTyp) {
+                const chart = typeChart[this.typ] || { starkGegen: [], schwachGegen: [] };
+                if (chart.starkGegen.includes(gegnerTyp)) return 2;
+                else if (chart.schwachGegen.includes(gegnerTyp)) return 0.5;
+                else return 1;
+            }
+            attackiere(attackeName, gegner) {
+                const attacke = this.attacken.find(a => a.name === attackeName);
+                const multiplier = this.getDamageMultiplier(gegner.typ);
+                const schaden = Math.round(attacke.schaden * multiplier);
+                gegner.hp -= schaden;
+                if (gegner.hp < 0) gegner.hp = 0;
+                output(`<b>${this.name}</b> benutzt <b>${attacke.name}</b>! (${multiplier}x Effektivität)<br>${gegner.name} verliert ${schaden} HP.`);
+                updateHpBars();
+            }
+        }
+        // --- Team und Gegner laden ---
+        const teamNames = JSON.parse(localStorage.getItem('team')) || ["Bisasam"];
+        const opponentName = JSON.parse(localStorage.getItem('opponent')) || "Pyro";
+        // Gegner-Pokémon je nach Gegner
+        const gegnerTeams = {
+            Pyro: ["Glumanda", "Glumanda"],
+            Koga: ["Nebulak", "Nebulak", "Glumanda"],
+            Giovanni: ["Digda", "Glumanda", "Pikachu"]
+        };
+        let playerIndex = 0;
+        let enemyIndex = 0;
+        let player = null;
+        let enemy = null;
+        let playerTeam = teamNames.map(name => {
+            const p = pokedex[name];
+            return new Pokemon(name, p.typ, p.hp, p.angriff, p.attacken, p.bild);
+        });
+        let enemyTeam = (gegnerTeams[opponentName] || ["Glumanda"]).map(name => {
+            const p = pokedex[name];
+            return new Pokemon(name, p.typ, p.hp, p.angriff, p.attacken, p.bild);
+        });
+        function updateHpBars() {
+            document.getElementById("player-hp").style.width = (player.hp / player.maxHp * 100) + "%";
+            document.getElementById("enemy-hp").style.width = (enemy.hp / enemy.maxHp * 100) + "%";
+        }
+        function output(text) {
+            const div = document.getElementById("output");
+            div.innerHTML += `<p>${text}</p>`;
+        }
+        function erstelleAttackenButtons() {
+            const div = document.getElementById("attacken");
+            div.innerHTML = "";
+            player.attacken.forEach(attacke => {
+                const btn = document.createElement("button");
+                btn.textContent = attacke.name;
+                btn.onclick = () => {
+                    if (player.hp <= 0 || enemy.hp <= 0) return;
+                    player.attackiere(attacke.name, enemy);
+                    if (enemy.hp <= 0) {
+                        output(`<b>${player.name}</b> besiegt ${enemy.name}!`);
+                        setTimeout(nextEnemy, 1200);
+                    } else {
+                        setTimeout(enemyGreiftAn, 800);
+                    }
+                };
+                div.appendChild(btn);
+            });
+        }
+        function enemyGreiftAn() {
+            if (enemy.hp <= 0) return;
+            const attacke = enemy.attacken[Math.floor(Math.random() * enemy.attacken.length)];
+            enemy.attackiere(attacke.name, player);
+            if (player.hp <= 0) {
+                output(`<b>${enemy.name}</b> besiegt ${player.name}!`);
+                setTimeout(nextPlayer, 1200);
+            }
+        }
+        function nextEnemy() {
+            enemyIndex++;
+            if (enemyIndex < enemyTeam.length) {
+                enemy = enemyTeam[enemyIndex];
+                document.getElementById("enemy-name").textContent = enemy.name;
+                document.getElementById("enemy-img").src = enemy.bild;
+                enemy.hp = enemy.maxHp;
+                updateHpBars();
+                output(`<b>Neuer Gegner: ${enemy.name}!</b>`);
+            } else {
+                output(`<b>Du hast gewonnen!</b>`);
+                document.getElementById("attacken").innerHTML = "";
+            }
+        }
+        function nextPlayer() {
+            playerIndex++;
+            if (playerIndex < playerTeam.length) {
+                player = playerTeam[playerIndex];
+                document.getElementById("player-name").textContent = player.name;
+                document.getElementById("player-img").src = player.bild;
+                player.hp = player.maxHp;
+                erstelleAttackenButtons();
+                updateHpBars();
+                output(`<b>Neues Pokémon: ${player.name}!</b>`);
+            } else {
+                output(`<b>Du hast verloren!</b>`);
+                document.getElementById("attacken").innerHTML = "";
+            }
+        }
+        function init() {
+            player = playerTeam[playerIndex];
+            enemy = enemyTeam[enemyIndex];
+            document.getElementById("player-name").textContent = player.name;
+            document.getElementById("player-img").src = player.bild;
+            document.getElementById("enemy-name").textContent = enemy.name;
+            document.getElementById("enemy-img").src = enemy.bild;
+            erstelleAttackenButtons();
+            updateHpBars();
+        }
+        init();
+    </script>
+</body>
+
+</html>

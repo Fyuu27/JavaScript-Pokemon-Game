@@ -1,0 +1,62 @@
+body {
+    background: linear-gradient(to bottom, #aee1f9, #f0f8ff);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center; 
+    align-items: center;  
+}
+
+.password-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.password-container input {
+  width: 100%;
+  padding: 10px 10px 10px 10px; 
+  font-size: 16px;
+}
+
+.password-container .toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px; 
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none; 
+}
+
+.Username-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.Username-container input {
+  width: 100%;
+  padding: 10px 10px 10px 10px; 
+  font-size: 16px;
+}
+
+.Username-container .toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px; 
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none; 
+}
+
+.loginb {
+    height: 20px;
+}
+
+.login-wrapper {
+  background: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
