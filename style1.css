@@ -1,17 +1,18 @@
-html, body {
-    height: 100%;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to bottom, #aee1f9, #f0f8ff) !important;
+html,
+body {
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #aee1f9, #f0f8ff) !important;
 }
 
 .Auswahl {
-    text-align: center;
+  text-align: center;
 }
 
 .container {
-    display: flex;
+  display: flex;
 }
 
 .poke1 {
@@ -44,17 +45,18 @@ html, body {
 }
 
 .cbutton:hover {
-    background-color: skyblue;
+  background-color: skyblue;
 }
 
 .teaml {
-    background-color: blue;
-    height: 2px;
+  background-color: blue;
+  height: 2px;
 }
 
 body {
-    background: linear-gradient(to bottom, #aee1f9, #f0f8ff);
+  background: linear-gradient(to bottom, #aee1f9, #f0f8ff);
 }
+
 #abra {
   height: 45%;
 }

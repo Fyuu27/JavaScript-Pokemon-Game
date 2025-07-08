@@ -1,105 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opponent</title>
-    <link rel="stylesheet" href="style1.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opponent</title>
+  <link rel="stylesheet" href="style1.css">
 </head>
+
 <body style="background: linear-gradient(120deg, #a8ff78, #78ffd6); min-height: 100vh; margin: 0;">
-     <hr class="teaml">
-    <header><h1 class="Auswahl">CHOOSE YOUR OPPONENT! </h1></header>
-    <hr class="teaml">
+  <hr class="teaml">
+  <header>
+    <h1 class="Auswahl">CHOOSE YOUR OPPONENT! </h1>
+  </header>
+  <hr class="teaml">
 
-    <div class="container">
+  <div class="container">
 
-   <div class="poke1">
-    <img src="./Pictures/220px-Pyro_LGPE_Artwork.png" alt="Pyro">
+    <div class="poke1">
+      <img src="./Pictures/220px-Pyro_LGPE_Artwork.png" alt="Pyro">
 
-<table class="poke1-table">
-    <tr>
-      <td><strong>Name</strong></td>
-      <td>Pyro</td>
-    </tr>
-    <tr>
-      <td><strong>Schwierigkeit</strong></td>
-      <td>Einfach</td>
-    </tr>
-    <tr>
-      <td><strong>Pokemon</strong></td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td><strong>Haupttyp</strong></td>
-      <td>Feuer</td>
-    </tr>
-  </table>
- <a href="Kampf.html">
-  <button class="cbutton" onclick="chooseOpponent('Pyro')">CHOOSE</button>
- </a>
-</div>
+      <table class="poke1-table">
+        <tr>
+          <td><strong>Name</strong></td>
+          <td>Pyro</td>
+        </tr>
+        <tr>
+          <td><strong>Schwierigkeit</strong></td>
+          <td>Einfach</td>
+        </tr>
+        <tr>
+          <td><strong>Pokemon</strong></td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td><strong>Haupttyp</strong></td>
+          <td>Feuer</td>
+        </tr>
+      </table>
+      <a href="Kampf.html">
+        <button class="cbutton" onclick="chooseOpponent('Pyro')">CHOOSE</button>
+      </a>
+    </div>
 
-   <div class="poke1">
-    <img src="./Pictures/250px-Koga_LGPE_Artwork.png" alt="Koga" >
+    <div class="poke1">
+      <img src="./Pictures/250px-Koga_LGPE_Artwork.png" alt="Koga">
 
-<table class="poke1-table">
-    <tr>
-      <td><strong>Name</strong></td>
-      <td>Koga</td>
-    </tr>
-    <tr>
-      <td><strong>Schwierigkeit</strong></td>
-      <td>Mttel</td>
-    </tr>
-    <tr>
-      <td><strong>Pokemon</strong></td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <td><strong>Haupttyp</strong></td>
-      <td>Gift</td>
-    </tr>
-  </table>
-    <a href="Kampf.html">
-    <button onclick="chooseOpponent('Koga')" class="cbutton">CHOOSE</button>
-    </a>
-</div>
+      <table class="poke1-table">
+        <tr>
+          <td><strong>Name</strong></td>
+          <td>Koga</td>
+        </tr>
+        <tr>
+          <td><strong>Schwierigkeit</strong></td>
+          <td>Mttel</td>
+        </tr>
+        <tr>
+          <td><strong>Pokemon</strong></td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td><strong>Haupttyp</strong></td>
+          <td>Gift</td>
+        </tr>
+      </table>
+      <a href="Kampf.html">
+        <button onclick="chooseOpponent('Koga')" class="cbutton">CHOOSE</button>
+      </a>
+    </div>
 
-  <div class="poke1">
-  <img src="./Pictures/250px-Giovanni_LGPE_Artwork.png" alt="Giovanni">
+    <div class="poke1">
+      <img src="./Pictures/250px-Giovanni_LGPE_Artwork.png" alt="Giovanni">
 
-  <table class="poke1-table">
-    <tr>
-      <td><strong>Name</strong></td>
-      <td>Giovanni</td>
-    </tr>
-    <tr>
-      <td><strong>Schwierigkeit</strong></td>
-      <td>Schwer</td>
-    </tr>
-    <tr>
-      <td><strong>Pokemon</strong></td>
-      <td>3?</td>
-    </tr>
-    <tr>
-      <td><strong>Haupttyp</strong></td>
-      <td>???</td>
-    </tr>
-    <tr>Nicht viel bekannt, unbesiegt!</tr>
-  </table>
-<a href="Kampf.html">
-  <button class="cbutton" onclick="chooseOpponent('Giovanni')">CHOOSE</button>
-</a>
-</div>
+      <table class="poke1-table">
+        <tr>
+          <td><strong>Name</strong></td>
+          <td>Giovanni</td>
+        </tr>
+        <tr>
+          <td><strong>Schwierigkeit</strong></td>
+          <td>Schwer</td>
+        </tr>
+        <tr>
+          <td><strong>Pokemon</strong></td>
+          <td>3?</td>
+        </tr>
+        <tr>
+          <td><strong>Haupttyp</strong></td>
+          <td>???</td>
+        </tr>
+        <tr>Nicht viel bekannt, unbesiegt!</tr>
+      </table>
+      <a href="Kampf.html">
+        <button class="cbutton" onclick="chooseOpponent('Giovanni')">CHOOSE</button>
+      </a>
+    </div>
 
-<script>
-function chooseOpponent(name) {
-    localStorage.setItem('opponent', JSON.stringify(name));
-}
-</script>
+    <script>
+      function chooseOpponent(name) {
+        localStorage.setItem('opponent', JSON.stringify(name));
+      }
+    </script>
 
     <a href="Poke1.html">
-    <button onclick="localStorage.removeItem('team')" >Team zurücksetzen!</button>
+      <button onclick="localStorage.removeItem('team')">Team zurücksetzen!</button>
     </a>
 </body>
+
 </html>

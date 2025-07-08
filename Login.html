@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="style2.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="style2.css">
 </head>
+
 <body>
 
-<div class="login-wrapper">
-<div class="Username-container">
-    <input type="text" id="Username" placeholder="Benutzername">
-</div>
+  <div class="login-wrapper">
+    <div class="Username-container">
+      <input type="text" id="Username" placeholder="Benutzername">
+    </div>
 
-<div class="password-container">
-  <input type="password" id="Password" placeholder="Passwort">
-  <span class="toggle" onclick="togglePassword()">👁️</span>
-</div>
+    <div class="password-container">
+      <input type="password" id="Password" placeholder="Passwort">
+      <span class="toggle" onclick="togglePassword()">👁️</span>
+    </div>
 
-<div class="loginb">
-    <button onclick="checklogin()">Einloggen</button>
-</div>
+    <div class="loginb">
+      <button onclick="checklogin()">Einloggen</button>
+    </div>
     <p id="message"></p>
-</div>
-<script>
+  </div>
+  <script>
     function togglePassword() {
       const pwField = document.getElementById("Password");
       if (pwField.type === "password") {
@@ -33,30 +35,31 @@
       }
     }
 
-    function checklogin () {
+    function checklogin() {
 
-    const cheatuser = "OGKeemo"
-    const cheatkey = "Hund"
-    const correctuser = "EBlackTV";
-    const correctkey = "Emi123";
-    const user = document.getElementById("Username").value;
-    const key = document.getElementById("Password").value;
+      const cheatuser = "OGKeemo"
+      const cheatkey = "Hund"
+      const correctuser = "EBlackTV";
+      const correctkey = "Emi123";
+      const user = document.getElementById("Username").value;
+      const key = document.getElementById("Password").value;
 
-        if (user === correctuser && key === correctkey) { 
-          window.location.href = "Poke1.html";
-        } else {
-            document.getElementById("message").textContent = "Falscher Benutzername oder Passwort!"
-        }
+      if (user === correctuser && key === correctkey) {
+        window.location.href = "Poke1.html";
+      } else {
+        document.getElementById("message").textContent = "Falscher Benutzername oder Passwort!"
+      }
 
-        if (user === cheatuser && key === cheatkey) {
-            window.location.href = "hidden.html"
-        } else {
-            document.getElementById("message").textContent = "Falscher Benutzername oder Passwort!"
-        }
+      if (user === cheatuser && key === cheatkey) {
+        window.location.href = "hidden.html"
+      } else {
+        document.getElementById("message").textContent = "Falscher Benutzername oder Passwort!"
+      }
 
-        }
-        
-</script>
+    }
+
+  </script>
 
 </body>
+
 </html>

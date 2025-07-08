@@ -319,7 +319,7 @@
         function nextEnemy() {
             enemyIndex++;
             if (opponentName === "Giovanni" && enemyIndex === enemyTeam.length - 1) {
-                output('Giovanni: Du hast meine Katze getötet! Mach dich auf was gefasst!', {giovanni:true});
+                output('Giovanni: Du hast meine Katze getötet! Mach dich auf was gefasst!', { giovanni: true });
                 setTimeout(() => {
                     if (enemyIndex < enemyTeam.length) {
                         enemy = enemyTeam[enemyIndex];
