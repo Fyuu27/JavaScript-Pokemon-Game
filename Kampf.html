@@ -75,6 +75,20 @@
             border-radius: 10px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
         }
+
+        /* CSS für Wechsel-Button und Attacken-Button */
+        .attack-btn {
+            background: #ff9800;
+            color: white;
+            margin: 5px;
+        }
+
+        .wechsel-btn {
+            background: #2196f3;
+            color: white;
+            margin: 5px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -101,13 +115,15 @@
     <script>
         // --- Datenbank für alle möglichen Pokémon ---
         const pokedex = {
-            Bisasam: { typ: "Pflanze", hp: 152, angriff: 49, bild: "./Pictures/250px-Hauptartwork_001.png", attacken: [{ name: "Rankenhieb", schaden: 20 }, { name: "Rasierblatt", schaden: 25 }, { name: "Solarstrahl", schaden: 40 }] },
-            Glumanda: { typ: "Feuer", hp: 146, angriff: 52, bild: "./Pictures/221px-Hauptartwork_004.png", attacken: [{ name: "Glut", schaden: 20 }, { name: "Feuerzahn", schaden: 30 }, { name: "Flammenwurf", schaden: 40 }] },
-            Schiggy: { typ: "Wasser", hp: 150, angriff: 48, bild: "./Pictures/242px-Hauptartwork_007.png", attacken: [{ name: "Aquaknarre", schaden: 20 }, { name: "Blubber", schaden: 25 }, { name: "Hydropumpe", schaden: 40 }] },
-            Pikachu: { typ: "Elektro", hp: 142, angriff: 55, bild: "./Pictures/250px-Hauptartwork_025.png", attacken: [{ name: "Donnerschock", schaden: 20 }, { name: "Donnerblitz", schaden: 30 }, { name: "Donner", schaden: 40 }] },
-            Digda: { typ: "Boden", hp: 117, angriff: 55, bild: "./Pictures/250px-Hauptartwork_050.png", attacken: [{ name: "Kratzer", schaden: 15 }, { name: "Schaufler", schaden: 30 }, { name: "Erdbeben", schaden: 40 }] },
-            Glaziola: { typ: "Eis", hp: 172, angriff: 60, bild: "./Pictures/250px-Hauptartwork_471.png", attacken: [{ name: "Eissplitter", schaden: 20 }, { name: "Eissturm", schaden: 30 }, { name: "Blizzard", schaden: 40 }] },
-            Nebulak: { typ: "Gift", hp: 137, angriff: 35, bild: "./Pictures/250px-Hauptartwork_092.png", attacken: [{ name: "Schlecker", schaden: 15 }, { name: "Spukball", schaden: 30 }, { name: "Giftschock", schaden: 35 }] }
+            Bisasam: { typ: "Pflanze", hp: 152, angriff: 49, bild: "250px-Hauptartwork_001.png", attacken: [{ name: "Rankenhieb", schaden: 20 }, { name: "Rasierblatt", schaden: 25 }, { name: "Solarstrahl", schaden: 40 }] },
+            Glumanda: { typ: "Feuer", hp: 146, angriff: 52, bild: "221px-Hauptartwork_004.png", attacken: [{ name: "Glut", schaden: 20 }, { name: "Feuerzahn", schaden: 30 }, { name: "Flammenwurf", schaden: 40 }] },
+            Schiggy: { typ: "Wasser", hp: 151, angriff: 48, bild: "242px-Hauptartwork_007.png", attacken: [{ name: "Aquaknarre", schaden: 20 }, { name: "Blubber", schaden: 25 }, { name: "Hydropumpe", schaden: 40 }] },
+            Pikachu: { typ: "Elektro", hp: 142, angriff: 55, bild: "250px-Hauptartwork_025.png", attacken: [{ name: "Donnerschock", schaden: 20 }, { name: "Donnerblitz", schaden: 30 }, { name: "Donner", schaden: 40 }] },
+            Digda: { typ: "Boden", hp: 117, angriff: 55, bild: "250px-Hauptartwork_050.png", attacken: [{ name: "Kratzer", schaden: 15 }, { name: "Schaufler", schaden: 30 }, { name: "Erdbeben", schaden: 40 }] },
+            Glaziola: { typ: "Eis", hp: 172, angriff: 60, bild: "250px-Hauptartwork_471.png", attacken: [{ name: "Eissplitter", schaden: 20 }, { name: "Eissturm", schaden: 30 }, { name: "Blizzard", schaden: 40 }] },
+            Nebulak: { typ: "Gift", hp: 137, angriff: 35, bild: "250px-Hauptartwork_092.png", attacken: [{ name: "Schlecker", schaden: 15 }, { name: "Spukball", schaden: 30 }, { name: "Giftschock", schaden: 35 }] },
+            Abra: { typ: "Psycho", hp: 132, angriff: 20, bild: "250px-Hauptartwork_063.png", attacken: [{ name: "Konfusion", schaden: 20 }, { name: "Psychokinese", schaden: 35 }, { name: "Teleport", schaden: 0 }] },
+            Mogelbaum: { typ: "Gestein", hp: 177, angriff: 100, bild: "216px-Hauptartwork_185.png", attacken: [{ name: "Steinwurf", schaden: 25 }, { name: "Bodycheck", schaden: 30 }, { name: "Holzhammer", schaden: 40 }] }
         };
         // --- Typen-Chart ---
         const typeChart = {
@@ -175,12 +191,26 @@
             const div = document.getElementById("output");
             div.innerHTML += `<p>${text}</p>`;
         }
+        function setPlayerPokemon(pokemon) {
+            player = pokemon;
+            document.getElementById("player-name").textContent = pokemon.name;
+            document.getElementById("player-img").src = "Pictures/" + pokemon.bild;
+            erstelleAttackenButtons();
+            updateHpBars();
+        }
+        function setEnemyPokemon(pokemon) {
+            document.getElementById("enemy-name").textContent = pokemon.name;
+            document.getElementById("enemy-img").src = "Pictures/" + pokemon.bild;
+            updateHpBars();
+        }
         function erstelleAttackenButtons() {
             const div = document.getElementById("attacken");
             div.innerHTML = "";
+            // Attacken-Buttons
             player.attacken.forEach(attacke => {
                 const btn = document.createElement("button");
                 btn.textContent = attacke.name;
+                btn.className = "attack-btn";
                 btn.onclick = () => {
                     if (player.hp <= 0 || enemy.hp <= 0) return;
                     player.attackiere(attacke.name, enemy);
@@ -193,6 +223,51 @@
                 };
                 div.appendChild(btn);
             });
+            // Trennlinie
+            const sep = document.createElement("div");
+            sep.style.margin = "10px 0";
+            div.appendChild(sep);
+            // Wechsel-Button
+            const wechselBtn = document.createElement("button");
+            wechselBtn.textContent = "Pokémon wechseln";
+            wechselBtn.className = "wechsel-btn";
+            wechselBtn.style.background = "#2196f3";
+            wechselBtn.style.marginTop = "10px";
+            wechselBtn.onclick = () => {
+                zeigeWechselAuswahl();
+            };
+            div.appendChild(wechselBtn);
+            // Platz für das Auswahlmenü
+            const auswahlDiv = document.createElement("div");
+            auswahlDiv.id = "wechsel-auswahl";
+            div.appendChild(auswahlDiv);
+        }
+        function zeigeWechselAuswahl() {
+            const auswahlDiv = document.getElementById("wechsel-auswahl");
+            auswahlDiv.innerHTML = "";
+            auswahlDiv.style.marginTop = "10px";
+            auswahlDiv.style.marginBottom = "10px";
+            auswahlDiv.style.display = "flex";
+            auswahlDiv.style.justifyContent = "center";
+            let found = false;
+            playerTeam.forEach((poke, idx) => {
+                if (poke !== player && poke.hp > 0) {
+                    found = true;
+                    const btn = document.createElement("button");
+                    btn.textContent = poke.name + ` (${poke.hp} HP)`;
+                    btn.className = "wechsel-btn";
+                    btn.onclick = () => {
+                        playerIndex = idx;
+                        setPlayerPokemon(playerTeam[playerIndex]);
+                        output(`<b>Du hast zu ${poke.name} gewechselt!</b>`);
+                        auswahlDiv.innerHTML = "";
+                    };
+                    auswahlDiv.appendChild(btn);
+                }
+            });
+            if (!found) {
+                auswahlDiv.textContent = "Kein anderes kampffähiges Pokémon!";
+            }
         }
         function enemyGreiftAn() {
             if (enemy.hp <= 0) return;
@@ -207,27 +282,27 @@
             enemyIndex++;
             if (enemyIndex < enemyTeam.length) {
                 enemy = enemyTeam[enemyIndex];
-                document.getElementById("enemy-name").textContent = enemy.name;
-                document.getElementById("enemy-img").src = enemy.bild;
-                enemy.hp = enemy.maxHp;
-                updateHpBars();
+                setEnemyPokemon(enemy);
                 output(`<b>Neuer Gegner: ${enemy.name}!</b>`);
             } else {
-                output(`<b>Du hast gewonnen!</b>`);
-                document.getElementById("attacken").innerHTML = "";
+                setTimeout(() => {
+                    window.location.href = "win.html";
+                }, 1200);
             }
         }
-        function nextPlayer() {
-            playerIndex++;
-            if (playerIndex < playerTeam.length) {
-                player = playerTeam[playerIndex];
-                document.getElementById("player-name").textContent = player.name;
-                document.getElementById("player-img").src = player.bild;
-                player.hp = player.maxHp;
-                erstelleAttackenButtons();
-                updateHpBars();
-                output(`<b>Neues Pokémon: ${player.name}!</b>`);
-            } else {
+        function nextPlayer(isSwitch = false) {
+            // Finde das nächste lebende Pokémon (außer das aktuelle)
+            let found = false;
+            for (let i = 0; i < playerTeam.length; i++) {
+                if (playerTeam[i].hp > 0 && playerTeam[i] !== player) {
+                    playerIndex = i;
+                    setPlayerPokemon(playerTeam[playerIndex]);
+                    output(isSwitch ? `<b>Du hast zu ${player.name} gewechselt!</b>` : `<b>Neues Pokémon: ${player.name}!</b>`);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
                 output(`<b>Du hast verloren!</b>`);
                 document.getElementById("attacken").innerHTML = "";
             }
@@ -235,12 +310,8 @@
         function init() {
             player = playerTeam[playerIndex];
             enemy = enemyTeam[enemyIndex];
-            document.getElementById("player-name").textContent = player.name;
-            document.getElementById("player-img").src = player.bild;
-            document.getElementById("enemy-name").textContent = enemy.name;
-            document.getElementById("enemy-img").src = enemy.bild;
-            erstelleAttackenButtons();
-            updateHpBars();
+            setPlayerPokemon(player);
+            setEnemyPokemon(enemy);
         }
         init();
     </script>
