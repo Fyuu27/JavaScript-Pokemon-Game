@@ -123,7 +123,9 @@
             Glaziola: { typ: "Eis", hp: 172, angriff: 60, bild: "250px-Hauptartwork_471.png", attacken: [{ name: "Eissplitter", schaden: 20 }, { name: "Eissturm", schaden: 30 }, { name: "Blizzard", schaden: 40 }] },
             Nebulak: { typ: "Gift", hp: 137, angriff: 35, bild: "250px-Hauptartwork_092.png", attacken: [{ name: "Schlecker", schaden: 15 }, { name: "Spukball", schaden: 30 }, { name: "Giftschock", schaden: 35 }] },
             Abra: { typ: "Psycho", hp: 132, angriff: 20, bild: "250px-Hauptartwork_063.png", attacken: [{ name: "Konfusion", schaden: 20 }, { name: "Psychokinese", schaden: 35 }, { name: "Teleport", schaden: 0 }] },
-            Mogelbaum: { typ: "Gestein", hp: 177, angriff: 100, bild: "216px-Hauptartwork_185.png", attacken: [{ name: "Steinwurf", schaden: 25 }, { name: "Bodycheck", schaden: 30 }, { name: "Holzhammer", schaden: 40 }] }
+            Mogelbaum: { typ: "Gestein", hp: 177, angriff: 100, bild: "216px-Hauptartwork_185.png", attacken: [{ name: "Steinwurf", schaden: 25 }, { name: "Bodycheck", schaden: 30 }, { name: "Holzhammer", schaden: 40 }] },
+            Snobilikat: { typ: "Normal", hp: 150, angriff: 70, bild: "250px-Hauptartwork_053.png", attacken: [{ name: "Kratzer", schaden: 20 }, { name: "Biss", schaden: 25 }, { name: "Schlitzer", schaden: 35 }] },
+            Rayquaza: { typ: "Drache", hp: 210, angriff: 150, bild: "250px-Hauptartwork_384.png", attacken: [{ name: "Hyperstrahl", schaden: 50 }, { name: "Windhose", schaden: 30 }, { name: "Wutanfall", schaden: 40 }] }
         };
         // --- Typen-Chart ---
         const typeChart = {
@@ -165,20 +167,53 @@
         // --- Team und Gegner laden ---
         const teamNames = JSON.parse(localStorage.getItem('team')) || ["Bisasam"];
         const opponentName = JSON.parse(localStorage.getItem('opponent')) || "Pyro";
-        // Gegner-Pokémon je nach Gegner
+        // --- Gegner-Pokémon je nach Gegner ---
+        function getRandomPokemon(filterFn) {
+            const keys = Object.keys(pokedex).filter(filterFn);
+            return keys[Math.floor(Math.random() * keys.length)];
+        }
         const gegnerTeams = {
-            Pyro: ["Glumanda", "Glumanda"],
-            Koga: ["Nebulak", "Nebulak", "Glumanda"],
-            Giovanni: ["Digda", "Glumanda", "Pikachu"]
+            Pyro: (() => {
+                // Ein Feuer-Pokémon
+                const fireMons = Object.keys(pokedex).filter(k => pokedex[k].typ === "Feuer");
+                const fire = fireMons[Math.floor(Math.random() * fireMons.length)];
+                // Ein zufälliges, aber nicht das gleiche wie das Feuer-Pokémon
+                const restMons = Object.keys(pokedex).filter(k => k !== fire);
+                const rnd = restMons[Math.floor(Math.random() * restMons.length)];
+                return [fire, rnd];
+            })(),
+            Koga: (() => {
+                // Mindestens ein Gift-Pokémon
+                const giftMons = Object.keys(pokedex).filter(k => pokedex[k].typ === "Gift");
+                const gift = giftMons[Math.floor(Math.random() * giftMons.length)];
+                // Zwei weitere zufällige, aber keine Dopplung
+                const restMons = Object.keys(pokedex).filter(k => k !== gift);
+                const rnd1 = restMons[Math.floor(Math.random() * restMons.length)];
+                const restMons2 = restMons.filter(k => k !== rnd1);
+                const rnd2 = restMons2[Math.floor(Math.random() * restMons2.length)];
+                return [gift, rnd1, rnd2];
+            })(),
+            Giovanni: (() => {
+                // Giovanni: 4 Pokémon, vorletztes Snobilikat, letztes Rayquaza, zwei zufällige davor
+                const exclude = ["Snobilikat", "Rayquaza"];
+                const rndMons = Object.keys(pokedex).filter(k => !exclude.includes(k));
+                // Zwei verschiedene zufällige Pokémon
+                let rnd1 = rndMons[Math.floor(Math.random() * rndMons.length)];
+                let restMons = rndMons.filter(k => k !== rnd1);
+                let rnd2 = restMons[Math.floor(Math.random() * restMons.length)];
+                return [rnd1, rnd2, "Snobilikat", "Rayquaza"];
+            })()
         };
         let playerIndex = 0;
         let enemyIndex = 0;
         let player = null;
         let enemy = null;
         let playerTeam = teamNames.map(name => {
+            // Korrigiere Shiggy zu Schiggy
+            if (name === "Shiggy") name = "Schiggy";
             const p = pokedex[name];
-            return new Pokemon(name, p.typ, p.hp, p.angriff, p.attacken, p.bild);
-        });
+            return p ? new Pokemon(name, p.typ, p.hp, p.angriff, p.attacken, p.bild) : null;
+        }).filter(Boolean);
         let enemyTeam = (gegnerTeams[opponentName] || ["Glumanda"]).map(name => {
             const p = pokedex[name];
             return new Pokemon(name, p.typ, p.hp, p.angriff, p.attacken, p.bild);

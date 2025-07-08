@@ -6,7 +6,7 @@
     <title>Opponent</title>
     <link rel="stylesheet" href="style1.css">
 </head>
-<body>
+<body style="background: linear-gradient(120deg, #a8ff78, #78ffd6); min-height: 100vh; margin: 0;">
      <hr class="teaml">
     <header><h1 class="Auswahl">CHOOSE YOUR OPPONENT! </h1></header>
     <hr class="teaml">
@@ -92,7 +92,11 @@
 </a>
 </div>
 
-<script src="opponentManagement.js"></script>
+<script>
+function chooseOpponent(name) {
+    localStorage.setItem('opponent', JSON.stringify(name));
+}
+</script>
 
     <a href="Poke1.html">
     <button onclick="localStorage.removeItem('team')" >Team zurücksetzen!</button>

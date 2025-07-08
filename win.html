@@ -56,11 +56,33 @@
     <div class="win-container">
         <div class="win-title">Glückwunsch! Du hast gewonnen!</div>
         <img class="win-img" src="Pictures/250px-Hauptartwork_025.png" alt="Sieger-Pokémon">
-        <div class="win-text">
+        <div class="win-text" id="win-message">
             Dein Team hat alle Gegner besiegt.<br>
             Du bist ein wahrer Pokémon-Champion!
         </div>
-        <button class="win-btn" onclick="window.location.href='Poke1.html'">Zurück zum Start</button>
+        <button class="win-btn" onclick="resetTeamAndGoHome()">Zurück zum Start</button>
     </div>
+    <script>
+        // Zeige je nach Gegner einen passenden Text an
+        let opp = null;
+        try {
+            opp = localStorage.getItem('opponent') ? JSON.parse(localStorage.getItem('opponent')) : null;
+        } catch (e) {
+            opp = localStorage.getItem('opponent');
+        }
+        let msg = '';
+        if (opp === 'Pyro') msg = 'Du hast den leichten Gegner Pyro besiegt!';
+        else if (opp === 'Koga') msg = 'Du hast den mittleren Gegner Koga besiegt!';
+        else if (opp === 'Giovanni') msg = 'Du hast den schweren Gegner Giovanni besiegt!';
+        if (msg) {
+            document.getElementById('win-message').innerHTML = msg + '<br><br>Dein Team hat alle Gegner besiegt.<br>Du bist ein wahrer Pokémon-Champion!';
+        }
+
+        function resetTeamAndGoHome() {
+            localStorage.removeItem('team');
+            localStorage.removeItem('opponent');
+            window.location.href = 'Poke1.html';
+        }
+    </script>
 </body>
 </html>
