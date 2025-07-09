@@ -126,41 +126,55 @@
             Mogelbaum: { typ: "Gestein", hp: 160, angriff: 80, bild: "216px-Hauptartwork_185.png", attacken: [{ name: "Steinwurf", schaden: 20 }, { name: "Bodycheck", schaden: 30 }, { name: "Holzhammer", schaden: 40 }] },
             Snobilikat: { typ: "Normal", hp: 150, angriff: 60, bild: "250px-Hauptartwork_053.png", attacken: [{ name: "Kratzer", schaden: 20 }, { name: "Biss", schaden: 25 }, { name: "Schlitzer", schaden: 30 }] },
             Rayquaza: { typ: "Drache", hp: 210, angriff: 150, bild: "250px-Hauptartwork_384.png", attacken: [{ name: "Hyperstrahl", schaden: 50 }, { name: "Windhose", schaden: 30 }, { name: "Wutanfall", schaden: 40 }] },
-            Arbok: { typ: "Gift", hp: 145, angriff: 55, bild: "223px-Hauptartwork_024.png", attacken: [
-                { name: "Giftbiss", schaden: 20 },
-                { name: "Giftschweif", schaden: 30 },
-                { name: "Wickel", schaden: 40 }
-            ] },
-            Froxy: { typ: "Wasser", hp: 140, angriff: 45, bild: "237px-Hauptartwork_656.png", attacken: [
-                { name: "Blubber", schaden: 20 },
-                { name: "Aqua-Welle", schaden: 25 },
-                { name: "Hydropumpe", schaden: 35 }
-            ] },
-            Panflam: { typ: "Feuer", hp: 135, angriff: 48, bild: "250px-Hauptartwork_391.png", attacken: [
-                { name: "Kratzer", schaden: 15 },
-                { name: "Flammenrad", schaden: 25 },
-                { name: "Feuerfeger", schaden: 35 }
-            ] },
-            Piondragie: { typ: "Gift", hp: 150, angriff: 60, bild: "250px-Hauptartwork_452.png", attacken: [
-                { name: "Giftstachel", schaden: 20 },
-                { name: "Giftzahn", schaden: 30 },
-                { name: "Giftwolke", schaden: 35 }
-            ] },
-            Trikephalo: { typ: "Drache", hp: 170, angriff: 80, bild: "250px-Hauptartwork_621.png", attacken: [
-                { name: "Drachenpuls", schaden: 30 },
-                { name: "Knirscher", schaden: 25 },
-                { name: "Hyperstrahl", schaden: 40 }
-            ] },
-            Aggrostella: { typ: "Gift", hp: 160, angriff: 65, bild: "250px-Hauptartwork_804.png", attacken: [
-                { name: "Giftspitzen", schaden: 20 },
-                { name: "Toxin", schaden: 30 },
-                { name: "Siedewasser", schaden: 35 }
-            ] },
-            Skelokrok: { typ: "Feuer", hp: 155, angriff: 50, bild: "250px-Hauptartwork_911.png", attacken: [
-                { name: "Flammenrad", schaden: 22 },
-                { name: "Nitroladung", schaden: 28 },
-                { name: "Hitzekoller", schaden: 42 }
-            ] }
+            Arbok: {
+                typ: "Gift", hp: 145, angriff: 55, bild: "223px-Hauptartwork_024.png", attacken: [
+                    { name: "Giftbiss", schaden: 20 },
+                    { name: "Giftschweif", schaden: 30 },
+                    { name: "Wickel", schaden: 40 }
+                ]
+            },
+            Froxy: {
+                typ: "Wasser", hp: 140, angriff: 45, bild: "237px-Hauptartwork_656.png", attacken: [
+                    { name: "Blubber", schaden: 20 },
+                    { name: "Aqua-Welle", schaden: 25 },
+                    { name: "Hydropumpe", schaden: 35 }
+                ]
+            },
+            Panflam: {
+                typ: "Feuer", hp: 135, angriff: 48, bild: "250px-Hauptartwork_391.png", attacken: [
+                    { name: "Kratzer", schaden: 15 },
+                    { name: "Flammenrad", schaden: 25 },
+                    { name: "Feuerfeger", schaden: 35 }
+                ]
+            },
+            Piondragie: {
+                typ: "Gift", hp: 150, angriff: 60, bild: "250px-Hauptartwork_452.png", attacken: [
+                    { name: "Giftstachel", schaden: 20 },
+                    { name: "Giftzahn", schaden: 30 },
+                    { name: "Giftwolke", schaden: 35 }
+                ]
+            },
+            Trikephalo: {
+                typ: "Drache", hp: 170, angriff: 80, bild: "250px-Hauptartwork_621.png", attacken: [
+                    { name: "Drachenpuls", schaden: 30 },
+                    { name: "Knirscher", schaden: 25 },
+                    { name: "Hyperstrahl", schaden: 40 }
+                ]
+            },
+            Aggrostella: {
+                typ: "Gift", hp: 160, angriff: 65, bild: "250px-Hauptartwork_804.png", attacken: [
+                    { name: "Giftspitzen", schaden: 20 },
+                    { name: "Toxin", schaden: 30 },
+                    { name: "Siedewasser", schaden: 35 }
+                ]
+            },
+            Skelokrok: {
+                typ: "Feuer", hp: 155, angriff: 50, bild: "250px-Hauptartwork_911.png", attacken: [
+                    { name: "Flammenrad", schaden: 22 },
+                    { name: "Nitroladung", schaden: 28 },
+                    { name: "Hitzekoller", schaden: 42 }
+                ]
+            }
         };
         // --- Typen-Chart ---
         const typeChart = {
@@ -198,6 +212,7 @@
                 output(`<b>${this.name}</b> benutzt <b>${attacke.name}</b>! (${multiplier}x Effektivität)<br>${gegner.name} verliert ${schaden} HP.`);
                 updateHpBars();
             }
+            
         }
         // --- Team und Gegner laden ---
         const teamNames = JSON.parse(localStorage.getItem('team')) || ["Bisasam"];
@@ -276,6 +291,7 @@
             document.getElementById("enemy-img").src = "Pictures/" + pokemon.bild;
             updateHpBars();
         }
+        let attackLocked = false;
         function erstelleAttackenButtons() {
             const div = document.getElementById("attacken");
             div.innerHTML = "";
@@ -284,14 +300,25 @@
                 const btn = document.createElement("button");
                 btn.textContent = attacke.name;
                 btn.className = "attack-btn";
+                btn.disabled = attackLocked;
                 btn.onclick = () => {
-                    if (player.hp <= 0 || enemy.hp <= 0) return;
+                    if (player.hp <= 0 || enemy.hp <= 0 || attackLocked) return;
+                    attackLocked = true;
+                    updateAttackenButtonState();
                     player.attackiere(attacke.name, enemy);
                     if (enemy.hp <= 0) {
                         output(`<b>${player.name}</b> besiegt ${enemy.name}!`);
-                        setTimeout(nextEnemy, 1200);
+                        setTimeout(() => {
+                            attackLocked = false;
+                            updateAttackenButtonState();
+                            nextEnemy();
+                        }, 1200);
                     } else {
-                        setTimeout(enemyGreiftAn, 800);
+                        setTimeout(() => {
+                            enemyGreiftAn();
+                            attackLocked = false;
+                            updateAttackenButtonState();
+                        }, 800);
                     }
                 };
                 div.appendChild(btn);
@@ -306,7 +333,9 @@
             wechselBtn.className = "wechsel-btn";
             wechselBtn.style.background = "#2196f3";
             wechselBtn.style.marginTop = "10px";
+            wechselBtn.disabled = attackLocked;
             wechselBtn.onclick = () => {
+                if (attackLocked) return;
                 zeigeWechselAuswahl();
             };
             div.appendChild(wechselBtn);
@@ -314,6 +343,10 @@
             const auswahlDiv = document.createElement("div");
             auswahlDiv.id = "wechsel-auswahl";
             div.appendChild(auswahlDiv);
+        }
+        function updateAttackenButtonState() {
+            document.querySelectorAll('.attack-btn').forEach(btn => btn.disabled = attackLocked);
+            document.querySelectorAll('.wechsel-btn').forEach(btn => btn.disabled = attackLocked);
         }
         function zeigeWechselAuswahl() {
             const auswahlDiv = document.getElementById("wechsel-auswahl");
