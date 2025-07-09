@@ -15,10 +15,10 @@
   </header>
   <hr class="teaml">
 
-  <div class="container">
-
-    <div class="poke1">
-      <img src="./Pictures/220px-Pyro_LGPE_Artwork.png" alt="Pyro">
+  <div class="container" style="justify-content: center; gap: 32px; margin-bottom: 40px;">
+    <div class="poke1"
+      style="background: linear-gradient(135deg, #ffe0b2 60%, #ff7043 100%); box-shadow: 0 4px 16px #ff7043; border-radius: 18px; min-width: 270px;">
+      <img src="./Pictures/220px-Pyro_LGPE_Artwork.png" alt="Pyro" style="height:120px;">
 
       <table class="poke1-table">
         <tr>
@@ -39,12 +39,14 @@
         </tr>
       </table>
       <a href="Kampf.html">
-        <button class="cbutton" onclick="chooseOpponent('Pyro')">CHOOSE</button>
+        <button class="cbutton" style="background: linear-gradient(90deg, #ff7043 0%, #ffd600 100%); color: #333; font-weight: bold; border-radius: 18px; box-shadow: 0 2px 8px #ffe0b2; letter-spacing: 1px; font-size: 1.1em; min-width: 120px;">🔥
+        CHOOSE</button>
       </a>
     </div>
 
-    <div class="poke1">
-      <img src="./Pictures/250px-Koga_LGPE_Artwork.png" alt="Koga">
+    <div class="poke1"
+      style="background: linear-gradient(135deg, #e1bee7 60%, #8e24aa 100%); box-shadow: 0 4px 16px #8e24aa; border-radius: 18px; min-width: 270px;">
+      <img src="./Pictures/250px-Koga_LGPE_Artwork.png" alt="Koga" style="height:120px;">
 
       <table class="poke1-table">
         <tr>
@@ -53,7 +55,7 @@
         </tr>
         <tr>
           <td><strong>Schwierigkeit</strong></td>
-          <td>Mttel</td>
+          <td>Mittel</td>
         </tr>
         <tr>
           <td><strong>Pokemon</strong></td>
@@ -65,12 +67,14 @@
         </tr>
       </table>
       <a href="Kampf.html">
-        <button onclick="chooseOpponent('Koga')" class="cbutton">CHOOSE</button>
+        <button onclick="chooseOpponent('Koga')" class="cbutton" style="background: linear-gradient(90deg, #ce93d8 0%, #8e24aa 100%); color: white; font-weight: bold; border-radius: 18px; box-shadow: 0 2px 8px #e1bee7; letter-spacing: 1px; font-size: 1.1em; min-width: 120px;">☠️
+        CHOOSE</button>
       </a>
     </div>
 
-    <div class="poke1">
-      <img src="./Pictures/250px-Giovanni_LGPE_Artwork.png" alt="Giovanni">
+    <div class="poke1"
+      style="background: linear-gradient(135deg, #d7ccc8 60%, #bcaaa4 100%); box-shadow: 0 4px 16px #bcaaa4; border-radius: 18px; min-width: 270px;">
+      <img src="./Pictures/250px-Giovanni_LGPE_Artwork.png" alt="Giovanni" style="height:120px;">
 
       <table class="poke1-table">
         <tr>
@@ -89,22 +93,32 @@
           <td><strong>Haupttyp</strong></td>
           <td>???</td>
         </tr>
-        <tr>Nicht viel bekannt, unbesiegt!</tr>
+        <tr>
+          <td colspan="2"
+            style="font-size:0.95em; color:#555; padding-top:8px;">Nicht viel bekannt, unbesiegt!</td>
+        </tr>
       </table>
       <a href="Kampf.html">
-        <button class="cbutton" onclick="chooseOpponent('Giovanni')">CHOOSE</button>
+        <button class="cbutton" onclick="chooseOpponent('Giovanni')" style="background: linear-gradient(90deg, #bcaaa4 0%, #8d6e63 100%); color: white; font-weight: bold; border-radius: 18px; box-shadow: 0 2px 8px #d7ccc8; letter-spacing: 1px; font-size: 1.1em; min-width: 120px;">👑
+        CHOOSE</button>
       </a>
     </div>
+  </div>
 
-    <script>
-      function chooseOpponent(name) {
-        localStorage.setItem('opponent', JSON.stringify(name));
-      }
-    </script>
-
+  <div style="display: flex; justify-content: center; margin-bottom: 30px;">
     <a href="Poke1.html">
-      <button onclick="localStorage.removeItem('team')">Team zurücksetzen!</button>
+      <button class="cbutton" onclick="localStorage.removeItem('team')"
+        style="background: linear-gradient(90deg, #42a5f5 0%, #478ed1 100%); color: white; font-weight: bold; min-width: 240px; border-radius: 24px; box-shadow: 0 2px 8px #b3e5fc; letter-spacing: 1px; font-size: 1.1em;">🔄
+        Team zurücksetzen!</button>
     </a>
+  </div>
+
+  <script>
+    function chooseOpponent(name) {
+      localStorage.setItem('opponent', JSON.stringify(name));
+    }
+  </script>
+
 </body>
 
 </html>
